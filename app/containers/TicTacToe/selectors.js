@@ -3,16 +3,16 @@ import { initialState } from './reducer';
 
 const selectTicTacToeDomain = state => state.ticTacToe || initialState;
 
-const selectSquares = () =>
+const selectHistoryGame = () =>
   createSelector(
     selectTicTacToeDomain,
-    substate => substate.squares,
+    substate => substate.historyGame,
   );
 
-const selectIsFirstPlayerNext = () =>
+const selectCurrentStep = () =>
   createSelector(
     selectTicTacToeDomain,
-    substate => substate.isFirstPlayerNext,
+    substate => substate.currentStep,
   );
 
-export { selectTicTacToeDomain, selectSquares, selectIsFirstPlayerNext };
+export { selectTicTacToeDomain, selectHistoryGame, selectCurrentStep };

@@ -5,12 +5,19 @@ import { createStructuredSelector } from 'reselect';
 
 import { TicTacToe } from './TicTacToe';
 import { actionSelectSquare } from './actions';
-import { selectSquares, selectIsFirstPlayerNext } from './selectors';
+import { selectHistoryGame, selectCurrentStep } from './selectors';
 
 const mapStateToProps = createStructuredSelector({
-  squares: selectSquares(),
-  isFirstPlayerNext: selectIsFirstPlayerNext(),
+  historyGame: selectHistoryGame(),
+  currentStep: selectCurrentStep(),
 });
+
+// const mapStateToProps = (q,w,e) => {
+//   console.log(q,w,e)
+//   return {
+//
+//   };
+// }
 
 const mapDispatchToProps = dispatch => ({
   handleSelectSquare: payload => dispatch(actionSelectSquare(payload)),

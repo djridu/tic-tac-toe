@@ -5,12 +5,16 @@ import { ticTacToeReducer } from './reducer';
 import './styles.css';
 
 TicTacToe.propTypes = {
-  squares: PropTypes.array.isRequired,
+  historyGame: PropTypes.shape({
+    squares: PropTypes.array.isRequired,
+  }).isRequired,
   handleSelectSquare: PropTypes.func.isRequired,
 };
 
 export function TicTacToe(props) {
-  const { squares, handleSelectSquare } = props;
+  const { historyGame, currentStep, handleSelectSquare } = props;
+  const squares = historyGame[currentStep];
+
   useInjectReducer({ key: 'ticTacToe', reducer: ticTacToeReducer });
 
   const getSquare = squareRow =>

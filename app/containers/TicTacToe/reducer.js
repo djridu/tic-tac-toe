@@ -2,17 +2,19 @@ import { SELECT_SQUARE } from './constants';
 import { calculateWinner } from './logic';
 
 export const initialState = {
-  squares: Array(9).fill(null),
   isFirstPlayerNext: true,
-  setsCount: 0,
-  firstPlayerCount: 0,
-  secondPlayerCount: 0,
-  steps: [],
-  stepsForward: [],
+  firstPlayerCountWins: 0,
+  secondPlayerCountWins: 0,
+  historyGame: [
+    {
+      squares: Array(9).fill(null),
+    },
+  ],
+  currentStep: 0,
 };
 
 export function ticTacToeReducer(state = initialState, action) {
-  const { squares, isFirstPlayerNext } = state;
+  const { squares, isFirstPlayerNext, historyGame, currentStep } = state;
   const { type, payload } = action;
 
   switch (type) {
@@ -28,6 +30,13 @@ export function ticTacToeReducer(state = initialState, action) {
       squaresCopy[squareIndex] = isFirstPlayerNext ? 'X' : 'O';
 
       return {
+        historyGame: [
+          ...historyGame,
+          {
+            squares: squaresCopy,
+          },
+        ],
+        currentStep: currentStep + 1,
         squares: squaresCopy,
         isFirstPlayerNext: !isFirstPlayerNext,
       };
